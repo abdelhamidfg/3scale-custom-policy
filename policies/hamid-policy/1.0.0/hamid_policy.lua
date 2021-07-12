@@ -22,7 +22,7 @@ if not res then
     -- return
 end
   if res then
-      ngx.log(ngx.ERR, "request success: ", res)
+      ngx.log(ngx.ERR, "request success: ", res.body)
   end   
 
 -- At this point, the entire request / response is complete and the connection
