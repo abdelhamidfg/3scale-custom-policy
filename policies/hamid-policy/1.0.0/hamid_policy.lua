@@ -1,7 +1,7 @@
 local _M = require('apicast.policy').new('Hamid Policy', '1.0.0')
 local mymathmodule = require("mymath")
 local new = _M.new
-
+local http_ng = require('resty.http_ng')
 local ipairs = ipairs
 local insert = table.insert
 
@@ -9,7 +9,7 @@ function _M.new(configuration)
   local self = new()
    mymathmodule.add(10,20)
   local ops = {}
-
+ ngx.log(ngx.ERR, http_ng)
   local config = configuration or {}
   local set_header = config.set_header or {}
   local x= mymathmodule.add(10,20)
