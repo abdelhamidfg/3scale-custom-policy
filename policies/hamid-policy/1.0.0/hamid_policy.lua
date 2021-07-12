@@ -9,7 +9,26 @@ function _M.new(configuration)
   local self = new()
    mymathmodule.add(10,20)
   local ops = {}
- ngx.log(ngx.ERR, 'http=',http_ng)
+ local httpc = require("resty.http").new()
+ local res, err = httpc:request_uri("http://example.com/helloworld", {
+    method = "GET",
+    body = "a=1&b=2",
+    headers = {
+        ["Content-Type"] = "application/x-www-form-urlencoded",
+    },
+})
+if not res then
+    ngx.log(ngx.ERR, "request failed: ", err)
+    return
+end
+
+-- At this point, the entire request / response is complete and the connection
+-- will be closed or back on the connection pool.
+
+-- The `res` table contains the expeected `status`, `headers` and `body` fields.
+local status = res.status
+local length = res.headers["Content-Length"]
+local body   = res.body 
   local config = configuration or {}
   local set_header = config.set_header or {}
   local x= mymathmodule.add(10,20)
