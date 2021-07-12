@@ -1,7 +1,7 @@
 local mymath =  {}
 
 function mymath.add(a,b)
-   print(a+b)
+   return a+b
 end
 
 function mymath.sub(a,b)
