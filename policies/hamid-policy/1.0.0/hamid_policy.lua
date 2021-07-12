@@ -10,11 +10,11 @@ function _M.new(configuration)
    mymathmodule.add(10,20)
   local ops = {}
  local httpc = require("resty.http").new()
- local res, err = httpc:request_uri("http://example.com/helloworld", {
+ local res, err = httpc:request_uri("http://location-service-dil-proj2.apps.cluster.ocp-hamid.com/locations", {
     method = "GET",
-    body = "a=1&b=2",
+    body = "",
     headers = {
-        ["Content-Type"] = "application/x-www-form-urlencoded",
+        ["Content-Type"] = "application/json",
     },
 })
 if not res then
