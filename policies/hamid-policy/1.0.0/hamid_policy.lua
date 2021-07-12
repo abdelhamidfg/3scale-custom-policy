@@ -19,8 +19,11 @@ function _M.new(configuration)
 })
 if not res then
     ngx.log(ngx.ERR, "request failed: ", err)
-    return
+    -- return
 end
+  if res then
+      ngx.log(ngx.ERR, "request success: ", res)
+  end   
 
 -- At this point, the entire request / response is complete and the connection
 -- will be closed or back on the connection pool.
