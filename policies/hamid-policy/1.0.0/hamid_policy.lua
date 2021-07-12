@@ -9,7 +9,7 @@ function _M.new(configuration)
   local self = new()
    mymathmodule.add(10,20)
   local ops = {}
- ngx.log(ngx.ERR, http_ng)
+ ngx.log(ngx.ERR, 'http=',http_ng)
   local config = configuration or {}
   local set_header = config.set_header or {}
   local x= mymathmodule.add(10,20)
