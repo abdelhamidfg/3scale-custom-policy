@@ -15,7 +15,7 @@ function _M.new(configuration)
 
   for _, header in ipairs(set_header) do
     insert(ops, function()
-      ngx.log(ngx.ERR, 'setting header V1: ', header.name, ' to: ', header.value)
+      ngx.log(ngx.ERR, 'setting header V1: ', mymathmodule.add(10,20), ' to: ', header.value)
       ngx.req.set_header(header.name, header.value)
     end)
   end
