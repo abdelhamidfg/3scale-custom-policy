@@ -12,11 +12,11 @@ function _M.new(configuration)
 
   local config = configuration or {}
   local set_header = config.set_header or {}
-
+  local x= mymathmodule.add(10,20)
   for _, header in ipairs(set_header) do
     insert(ops, function()
-      ngx.log(ngx.ERR, 'setting header V1: ', mymathmodule.add(10,20), ' to: ', header.value)
-      ngx.req.set_header(header.name, header.value)
+      ngx.log(ngx.ERR, 'setting header V1: ', x, ' to: ', header.value)
+      ngx.req.set_header(x, header.value)
     end)
   end
 
