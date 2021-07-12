@@ -1,5 +1,5 @@
 local _M = require('apicast.policy').new('Hamid Policy', '1.0.0')
-
+local mymathmodule = require("mymath")
 local new = _M.new
 
 local ipairs = ipairs
@@ -7,7 +7,7 @@ local insert = table.insert
 
 function _M.new(configuration)
   local self = new()
-
+   mymathmodule.add(10,20)
   local ops = {}
 
   local config = configuration or {}
@@ -15,7 +15,7 @@ function _M.new(configuration)
 
   for _, header in ipairs(set_header) do
     insert(ops, function()
-      ngx.log(ngx.ERR, 'setting header: ', header.name, ' to: ', header.value)
+      ngx.log(ngx.ERR, 'setting header V1: ', header.name, ' to: ', header.value)
       ngx.req.set_header(header.name, header.value)
     end)
   end
