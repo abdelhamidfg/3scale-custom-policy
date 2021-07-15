@@ -50,11 +50,15 @@ end
 
 function _M:rewrite()
 ngx.log(ngx.ERR,'rewrite start')
-    local request_method =  ngx.req.get_method()
-  ngx.log(ngx.ERR, "request_method=s: ", request_method)
   for _,op in ipairs(self.ops) do
     op()
   end
 end
-
+function _M:access(context)
+  ngx.log(ngx.ERR,'access start')
+  local uri = context:get_uri()
+  local request_method =  ngx.req.get_method()
+  ngx.log(ngx.ERR, "request_method=: ", request_method)
+  ngx.log(ngx.ERR, "uri=: ", uri)
+end  
 return _M
