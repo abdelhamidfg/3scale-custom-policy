@@ -59,6 +59,6 @@ function _M:access(context)
   --local uri = context:get_uri()
   local request_method =  ngx.req.get_method()
   ngx.log(ngx.ERR, "request_method=: ", request_method)
-  ngx.log(ngx.ERR, "context=: ", context)
+  ngx.log(ngx.ERR, "client=: ", request_method.client)
 end  
 return _M
