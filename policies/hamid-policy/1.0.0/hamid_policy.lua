@@ -8,8 +8,7 @@ local insert = table.insert
 function _M.new(configuration)
   local self = new()
    mymathmodule.add(10,20)
-  local request_method =  ngx.req.get_method()
-  ngx.log(ngx.ERR, "request_method=s: ", request_method)
+
   local ops = {}
  local httpc = require("resty.http").new()
  local res, err = httpc:request_uri("http://location-service-dil-proj2.apps.cluster.ocp-hamid.com/locations", {
@@ -51,6 +50,8 @@ end
 
 function _M:rewrite()
 ngx.log(ngx.ERR,'rewrite start')
+    local request_method =  ngx.req.get_method()
+  ngx.log(ngx.ERR, "request_method=s: ", request_method)
   for _,op in ipairs(self.ops) do
     op()
   end
