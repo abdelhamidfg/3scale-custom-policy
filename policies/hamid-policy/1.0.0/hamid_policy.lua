@@ -56,9 +56,9 @@ ngx.log(ngx.ERR,'rewrite start')
 end
 function _M:access(context)
   ngx.log(ngx.ERR,'access start')
-  local uri = context:get_uri()
+  --local uri = context:get_uri()
   local request_method =  ngx.req.get_method()
   ngx.log(ngx.ERR, "request_method=: ", request_method)
-  ngx.log(ngx.ERR, "uri=: ", uri)
+  ngx.log(ngx.ERR, "context=: ", context)
 end  
 return _M
