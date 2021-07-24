@@ -92,7 +92,8 @@ ngx.log(ngx.ERR,'rewrite start')
 end
 function _M:access(context)
   ngx.log(ngx.ERR,'access start')
-  print(check_authorization("http://location-service-dil-proj2.apps.cluster.ocp-hamid.com/locations","admin","GET","/student"))
+  local is_auth=check_authorization("http://location-service-dil-proj2.apps.cluster.ocp-hamid.com/locations","admin","GET","/student")
+  ngx.log(ngx.ERR, "is_auth= ", is_auth)
   --local uri = context:get_uri()
   local uri = ngx.var.uri
   local request_method =  ngx.req.get_method()
