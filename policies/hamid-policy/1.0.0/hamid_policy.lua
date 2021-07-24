@@ -96,6 +96,7 @@ end
 function _M:access(context)
   ngx.log(ngx.ERR,'access start')
   ngx.log(ngx.ERR,"self.JWT_claim_name=",self.JWT_claim_name)
+  ngx.log(ngx.ERR,"self.JWT_claim_name value=",context.jwt[self.JWT_claim_name])
   
   local is_auth=check_authorization("http://location-service-dil-proj2.apps.cluster.ocp-hamid.com/locations","admin","GET","/student")
   ngx.log(ngx.ERR, "is_auth= ", is_auth)
