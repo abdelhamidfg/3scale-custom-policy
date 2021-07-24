@@ -1,5 +1,5 @@
 local _M = require('apicast.policy').new('Hamid Policy', '1.0.0')
-local mymathmodule = require("mymath")
+
 local new = _M.new
 local http_ng = require('resty.http_ng')
 local ipairs = ipairs
@@ -7,9 +7,9 @@ local insert = table.insert
 
 function _M.new(configuration)
   local self = new()
-   mymathmodule.add(10,20)
 
-  local ops = {}
+
+ local ops = {}
  local httpc = require("resty.http").new()
  local res, err = httpc:request_uri("http://location-service-dil-proj2.apps.cluster.ocp-hamid.com/locations", {
     method = "GET",
@@ -22,9 +22,9 @@ if not res then
     ngx.log(ngx.ERR, "request failed: ", err)
     -- return
 end
-  if res then
-      ngx.log(ngx.ERR, "request success: ", res.body)
-  end   
+  --if res then
+    --  ngx.log(ngx.ERR, "request success: ", res.body)
+  --end   
 
 -- At this point, the entire request / response is complete and the connection
 -- will be closed or back on the connection pool.
@@ -35,7 +35,7 @@ local length = res.headers["Content-Length"]
 local body   = res.body 
   local config = configuration or {}
   local set_header = config.set_header or {}
-  local x= mymathmodule.add(10,20)
+  
   for _, header in ipairs(set_header) do
     insert(ops, function()
       ngx.log(ngx.ERR, 'setting header V1: ', x, ' to: ', header.value)
@@ -48,6 +48,42 @@ local body   = res.body
   return self
 end
 
+local function isempty(s)
+  return s == nil or s == ''
+end
+
+local function check_authorization(auth_endpoint,role,method,resource)
+      local is_authorized=false
+      if isempty(auth_endpoint) or isempty(role) or isempty(method) or isempty(resource) then
+       return is_authorized
+      end
+      local ops = {}
+      local query={}
+      query.role=role
+      query.method=method
+      query,resource=resource
+      local httpc = require("resty.http").new()
+      local res, err = httpc:request_uri(auth_endpoint, {
+        method = "GET",
+        body = "",
+        query=query,
+        headers = {
+            ["Content-Type"] = "application/json",
+        },
+      })
+if not res then
+    ngx.log(ngx.ERR, "request failed: ", err)
+    return is_authorized 
+end
+  if res then
+      ngx.log(ngx.ERR, "request success: ", res.body)
+      if not isempty(res.body) and string.find(res.body, "true") then
+          return true
+      end
+  end      
+      return is_authorized
+end
+
 function _M:rewrite()
 ngx.log(ngx.ERR,'rewrite start')
   for _,op in ipairs(self.ops) do
@@ -56,6 +92,7 @@ ngx.log(ngx.ERR,'rewrite start')
 end
 function _M:access(context)
   ngx.log(ngx.ERR,'access start')
+  print(check_authorization("http://location-service-dil-proj2.apps.cluster.ocp-hamid.com/locations","admin","GET","/student"))
   --local uri = context:get_uri()
   local uri = ngx.var.uri
   local request_method =  ngx.req.get_method()
