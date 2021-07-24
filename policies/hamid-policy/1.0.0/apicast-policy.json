@@ -8,29 +8,29 @@
     "And prints a log entry for each header set. " ],
   "version": "1.0.0",
   "configuration": {
-   "type": "object",
-    "properties": {
+
+
       "author_rest_endpoint": {
         "title": "Authorization REST Endpoint ",
         "description": "REST Endpoint for Authorization",
         "type": "string"
-      }},
-     "type": "object",
-    "properties": {
+      },
+     
+    
       "JWT_claim_name": {
         "title": "JWT Claim name of the user role ",
         "description": "JWT Claim name of the user role",
         "type": "string"
-      }},
+      },
     
     
-    "type": "object",
-    "properties": {
+    
+    
       "error_message": {
         "title": "Error message",
         "description": "Error message to show to user when traffic is blocked",
         "type": "string"
-      }},
+      },
     
     "type": "object",
     "properties": {
