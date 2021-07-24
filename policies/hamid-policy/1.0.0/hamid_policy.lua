@@ -97,12 +97,12 @@ function _M:access(context)
   ngx.log(ngx.ERR,'access start')
   ngx.log(ngx.ERR,"self.JWT_claim_name=",self.JWT_claim_name)
   ngx.log(ngx.ERR,"self.JWT_claim_name value=",context.jwt[self.JWT_claim_name])
-  
-  local is_auth=check_authorization("http://location-service-dil-proj2.apps.cluster.ocp-hamid.com/locations","admin","GET","/student")
+    local uri = ngx.var.uri
+  local request_method =  ngx.req.get_method()
+  local is_auth=check_authorization( self.author_rest_endpoint,context.jwt[self.JWT_claim_name],request_method,uri)
   ngx.log(ngx.ERR, "is_auth= ", is_auth)
   --local uri = context:get_uri()
-  local uri = ngx.var.uri
-  local request_method =  ngx.req.get_method()
+
   --ngx.log(ngx.ERR, "context.jwt= ", context.jwt)
   if context.jwt then
      print("esthaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
