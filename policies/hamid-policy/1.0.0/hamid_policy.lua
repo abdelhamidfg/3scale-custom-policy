@@ -59,7 +59,10 @@ function _M:access(context)
   --local uri = context:get_uri()
   local uri = ngx.var.uri
   local request_method =  ngx.req.get_method()
-  ngx.log(ngx.ERR, "context.jwt= ", context.jwt)
+  --ngx.log(ngx.ERR, "context.jwt= ", context.jwt)
+  if context.jwt then
+     print("esthaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+  end
   ngx.log(ngx.ERR, "context.jwt.user_group= ", context.jwt.user_group)
   
   ngx.log(ngx.ERR, "uri=: ", uri)
