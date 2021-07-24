@@ -44,7 +44,10 @@ local body   = res.body
   end
 
   self.ops = ops
-
+  self.author_rest_endpoint=config.author_rest_endpoint
+  self.JWT_claim_name=config.JWT_claim_name
+  self.error_message=config.error_message
+  
   return self
 end
 
@@ -92,6 +95,8 @@ ngx.log(ngx.ERR,'rewrite start')
 end
 function _M:access(context)
   ngx.log(ngx.ERR,'access start')
+  ngx.log(ngx.ERR,"self.JWT_claim_name=",self.JWT_claim_name)
+  
   local is_auth=check_authorization("http://location-service-dil-proj2.apps.cluster.ocp-hamid.com/locations","admin","GET","/student")
   ngx.log(ngx.ERR, "is_auth= ", is_auth)
   --local uri = context:get_uri()
