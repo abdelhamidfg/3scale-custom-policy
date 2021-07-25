@@ -64,7 +64,7 @@ local function check_authorization(auth_endpoint,role,method,resource)
       local query={}
       query.role=role
       query.method=method
-      query,resource=resource
+      query.resource=resource
       local httpc = require("resty.http").new()
       local res, err = httpc:request_uri(auth_endpoint, {
         method = "GET",
