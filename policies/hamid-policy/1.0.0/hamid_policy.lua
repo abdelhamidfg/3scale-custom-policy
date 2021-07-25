@@ -16,6 +16,13 @@ function _M.new(configuration)
   return self
 end
 
+function _M:rewrite()
+ngx.log(ngx.ERR,'rewrite start')
+  for _,op in ipairs(self.ops) do
+    op()
+  end
+end
+
 local function isempty(s)
   return s == nil or s == ''
 end
