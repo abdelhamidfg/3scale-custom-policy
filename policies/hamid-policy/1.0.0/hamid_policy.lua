@@ -87,6 +87,12 @@ end
       return is_authorized
 end
 
+local function deny_request(error_msg)
+  ngx.status = ngx.HTTP_FORBIDDEN
+  ngx.say(error_msg)
+  ngx.exit(ngx.status)
+end
+
 function _M:rewrite()
 ngx.log(ngx.ERR,'rewrite start')
   for _,op in ipairs(self.ops) do
@@ -113,6 +119,6 @@ function _M:access(context)
   ngx.log(ngx.ERR, "type of request_method= ", type(request_method))
   ngx.log(ngx.ERR, "request_method=: ", request_method)
   ngx.log(ngx.ERR, "client=: ", request_method.client)
-  return false
+   return deny_request(self.error_message)
 end  
 return _M
