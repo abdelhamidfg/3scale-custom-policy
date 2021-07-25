@@ -1,8 +1,5 @@
 local _M = require('apicast.policy').new('Hamid Policy', '1.0.0')
-
 local new = _M.new
-local ipairs = ipairs
-local insert = table.insert
 
 function _M.new(configuration)
   local self = new()
