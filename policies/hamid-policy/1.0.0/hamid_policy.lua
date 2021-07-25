@@ -119,6 +119,8 @@ function _M:access(context)
   ngx.log(ngx.ERR, "type of request_method= ", type(request_method))
   ngx.log(ngx.ERR, "request_method=: ", request_method)
   ngx.log(ngx.ERR, "client=: ", request_method.client)
+  if not is_auth then
    return deny_request(self.error_message)
+  end   
 end  
 return _M
