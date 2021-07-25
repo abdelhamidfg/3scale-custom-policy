@@ -1,7 +1,6 @@
 local _M = require('apicast.policy').new('Hamid Policy', '1.0.0')
 
 local new = _M.new
-local http_ng = require('resty.http_ng')
 local ipairs = ipairs
 local insert = table.insert
 
@@ -58,11 +57,7 @@ local function deny_request(error_msg)
   ngx.exit(ngx.status)
 end
 
-function _M:rewrite()
-  for _,op in ipairs(self.ops) do
-    op()
-  end
-end
+
 function _M:access(context)
   local uri = ngx.var.uri
   local request_method =  ngx.req.get_method()
