@@ -31,24 +31,7 @@
         "title": "Error message",
         "description": "Error message to show to user when traffic is blocked",
         "type": "string"
-      },
-      "set_header": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "HTTP header name"
-            },
-            "value": {
-              "type": "string",
-              "description": "HTTP header value"
-            }
-          },
-          "required": ["name", "value"]
-        }
-      }
+      } 
     }
   }
 }
