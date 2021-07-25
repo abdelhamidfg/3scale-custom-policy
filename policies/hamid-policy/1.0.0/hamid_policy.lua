@@ -80,7 +80,7 @@ if not res then
 end
   if res then
       ngx.log(ngx.ERR, "request success: ", res.body)
-      if not isempty(res.body) and string.find(res.body, "Kamarhati") then
+      if not isempty(res.body) and string.find(res.body, "true") then
           return true
       end
   end      
